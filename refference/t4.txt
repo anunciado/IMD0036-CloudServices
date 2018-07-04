@@ -1,0 +1,74 @@
+Serviços de Núvem
+
+Uma forma comum de serviço na internet é a execução em núvem de funções. Suponha que você tenha um computador muito ruim para um determinado trabalho, como fazer codificaçao de vídeos, por exemplo, você pode usar um serviço de núvem que faça o trabalho para você, enquanto seu computador faz outras tarefas menos pesadas.
+
+Nesse trabalho impelmentaremos um servidor de serviços de núvem. O nosso servidor irá executar tarefas para o cliente, enquanto o cliente faz outras(ou nenhuma) tarefa.
+
+A estrutura de serviços em núvem é simples, no ponto de vista do sistema, para facilitar vou chamar de funçao na núvem, aquela funçao que executa no servidor, e função local a fuçao que executa no cliente.
+
+Para executar uma função na núvem são necessários três passos:
+  1 - Criação de um Esqueleto(stub) da função do lado do cliente, assim, o mesmo irá chamar a função como se executasse uma função em C.
+  2 - Serialização dos parâmetros, os parametros precisam ser transformados em um conjunto de bytes para serem mandados para o servidor.
+  3 - Desserialização da resposta, a resposta do servidor precisa ser transformada em uma estrutura válida para o cliente.
+
+Usando essa arquitetura, implemente um sistema de computação em núvem capaz de processar imagens. 
+
+O cliente deve realizar, localmente, operações de pixel:
+
+1 - limiarização: Esse processo consiste em zerar todos os píxels com valores menores do que um valor determinado (em uma imagem preto e branco) ou zerar todos os pixels com valor menor do que três valores de RGB, na imagem, mantendo os demais.
+2 - Transformação de sistema de cores: Consiste em realizar a transformação do sistema de cores da imagem para o espaço YCbCr.
+
+Caso as operações sejam uma das duas que seguem o cliente deve enviar para o servidor:
+
+4 - Alfa Blending: Essa operação consite em unir duas imagens de acordo com um certo valor de alfa associado à cada pixel, as imagens são misturadas levando em conta o valor de alfa e um cálculo pixel à pixel que vai calcular a cor do pixel final.
+5 - Filtragem: Consiste em realizar a convolução entre uma imagem e um filtro (uma imagem menor), pré definida. A convolução transforma a imagem operada em uma imagem filtrada com parâmetros dependente do filtro usado.
+
+Como dito anteriormente, as funções 4 e 5 devem executar no servidor enquanto que as funções 1 e 2 devem executar localmente. Os cabeçalhos para as funções devem ser:
+
+typedef union Pixel_t{
+	struct rgb{
+		int r, g, b, a;
+	};
+	struct ycbcr{
+		int y,cb,cr, a;
+	};
+}Pixel;
+
+typedef struct Image_t{
+	int width, height; //valores de altura e largura
+	Pixel **r_values;//valores de r, g e b
+	int type; //1 == rgb, 2 == ycbcr
+}Image;
+
+/*
+ *@param im, imagem para ser processada e limiarizada.
+ *@return imagem com os pixels limiarizados
+ */
+Image* limiarization(Image *im, Pixel limiar)
+
+
+/*
+ *@param img Imagem que será transformada
+ *@param from, to parametros que marcam o tipo de tranformação. 
+ *       1 = RGB, 2 = ybcr.
+ *@return imagem no padrão especificado
+ */
+Image* transform(Image *im, int from, int to)
+
+/*
+* @param dest a imagem a servir como base
+* @param src imagem a ser usada na operação de alfa
+* @return imagem resultante depois da operação de composição de alfa
+*/
+Image* alphaTransform(Image *dest, Image *src)
+
+/*
+* @param img a imagem a servir como base
+* @param a imagem a ser usada na operação de alfa
+* @param imagem contendo os valores do filtro a ser usado na operaçao
+* @return imagem filtrada
+*/
+Image* filter(Image *dest, Image *filter)
+
+
+
