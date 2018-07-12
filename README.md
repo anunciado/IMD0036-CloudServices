@@ -1,88 +1,75 @@
-# Project Title
+# Cloud Services
 
-One Paragraph of project description goes here
-
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+In this project we implemented a cloud services server capable of processing images. Our server will perform tasks for the client, while the client does other (or no) tasks.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+You will need to install the modules below to run the program: 
+* [python 3.7 or greater](https://www.python.org/downloads/release/python-370/)
+* [zmq](https://pypi.org/project/zmq/)
+* [cv2](https://pypi.org/project/opencv-python/)
 
+### Running
+
+There are two ways to run the program:
+
+* Compile the IDE (PyCharm - Python IDE):
+1. Just open the IDE
+2. Import the project folder as a Project
+3. Select Run/Debug Configurations:
+For server:
 ```
-Give examples
+-a <alphafile> -p <port>
 ```
-
-### Installing
-
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
+An example would be:
 ```
-Give the example
+-a ../input/pelican.png -p 9000
 ```
-
-And repeat
-
+For client:
 ```
-until finished
+-i <inputfile> -o <outputfile> -p <port> -t <technique>
 ```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
+An example would be:
 ```
-Give an example
+-i ../input/luis.png -o ../output/process_image.png -p 9000 -t alpha
 ```
+4. Choose Run client on the context menu.
+5. Choose Run server on the context menu.
+6. From this it only interacts with the system and add in script parameters box contents:
 
-### And coding style tests
-
-Explain what these tests test and why
-
+* Compile by terminal:
+1. Enter the src folder and run the following command:
+For server:
 ```
-Give an example
+$ python server.py -a <alphafile> -p <port>
 ```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+An example would be:
+```
+$ python server.py -a ../input/pelican.png -p 9000
+```
+For client:
+```
+$ python client.py -i <inputfile> -o <outputfile> -p <port> -t <technique>
+```
+An example would be:
+```
+$ python client.py -i ../input/luis.png -o ../output/process_image.png -p 9000 -t alpha
+```
+2. From this it only interacts with the system.
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+* [PyCharm](https://www.jetbrains.com/pycharm/) - A IDE used
 
 ## Authors
+### Developers: 
+* **Luís Eduardo Anunciado Silva ([cruxiu@ufrn.edu.br](mailto:cruxiu@ufrn.edu.br))** 
+* **Larissa Gilliane Melo De Moura ([larissagilliane@ufrn.edu.br](mailto:larissagilliane@ufrn.edu.br))** 
+### Project Advisor: 
+* **Julio Cesar Paulino De Melo ([julio.melo@imd.ufrn.br](mailto:julio.melo@imd.ufrn.br))** 
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/cruxiu/IMD0036-CloudServices/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
-
+This project is licensed under the GPL 3.0 - see the [LICENSE](LICENSE) file for details
